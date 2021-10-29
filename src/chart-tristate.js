@@ -71,7 +71,7 @@
                 canvasHeight, height, halfHeight,
                 x, y, color;
 
-            canvasHeight = target.pixelHeight;
+            canvasHeight = parseInt(target.pixelHeight);
             halfHeight = Math.round(canvasHeight / 2);
 
             x = valuenum * this.totalBarWidth;

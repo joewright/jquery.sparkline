@@ -196,8 +196,8 @@
             if (!(this.target = this.$el.simpledraw(this.width, this.height, this.options.get('composite'), interactive))) {
                 this.disabled = true;
             } else {
-                this.canvasWidth = this.target.pixelWidth;
-                this.canvasHeight = this.target.pixelHeight;
+                this.canvasWidth = parseInt(this.target.pixelWidth);
+                this.canvasHeight = parseInt(this.target.pixelHeight);
             }
         },
 

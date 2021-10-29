@@ -219,22 +219,32 @@
                 }
             }
             yoffsetNeg = yoffset;
+            var min = Math.min.apply(this, vals)
+            var sum = vals.reduce(function(accum, val) {
+                return accum + val;
+            }, 0);
+            // shift numbers to postivie vals when there's a negative axis
+            if (min < 0) {
+                sum = vals.reduce(function(accum, val) {
+                    return accum + (val + Math.abs(min));
+                }, 0);
+            }
+            var adjustment = canvasHeightEf / sum;
             for (i = 0; i < valcount; i++) {
                 val = vals[i];
 
-                if (stacked && val === xaxisOffset) {
-                    if (!allMin || minPlotted) {
-                        continue;
-                    }
-                    minPlotted = true;
+                if (stacked && val === 0) {
+                    continue;
                 }
 
-                if (range > 0) {
-                    height = Math.floor(canvasHeightEf * ((Math.abs(val - xaxisOffset) / range))) + 1;
+                if (range > 3 || (range > 0 && xaxisOffset < 0)) {
+                    height = Math.floor(canvasHeightEf * ((Math.abs(val - xaxisOffset) / range)));
+                } else if (range > 0) {
+                    height = Math.abs(val * adjustment);
                 } else {
                     height = 1;
                 }
-                if (val < xaxisOffset || (val === xaxisOffset && yoffset === 0)) {
+                if (val < xaxisOffset) {
                     y = yoffsetNeg;
                     yoffsetNeg += height;
                 } else {
