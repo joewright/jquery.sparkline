@@ -222,11 +222,8 @@
             for (i = 0; i < valcount; i++) {
                 val = vals[i];
 
-                if (stacked && val === xaxisOffset) {
-                    if (!allMin || minPlotted) {
-                        continue;
-                    }
-                    minPlotted = true;
+                if (stacked && val === 0) {
+                    continue
                 }
 
                 if (range > 0) {
